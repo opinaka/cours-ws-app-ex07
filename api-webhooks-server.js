@@ -11,7 +11,7 @@ const swaggerDocument = require('./webhooks-swagger.json'); // Chemin vers votre
 app.use(bodyParser.json());
 
 // Servez la documentation Swagger UI à partir du fichier JSON
-//app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Personnalisation du rendu de Swagger UI
 const swaggerOptions = {
@@ -31,7 +31,7 @@ const swaggerOptions = {
   customSiteTitle: "Opinaka",
   customfavIcon: "https://raw.githubusercontent.com/opinaka/cours-ws-app-ex06/main/ynov.png"
 };
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 // Liste des webhooks avec les URLs des API des clients
 const webhooks = new Map();
