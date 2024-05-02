@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Mon API Express.js",
+    "title": "Webhook API Server",
     "version": "1.0.0",
-    "description": "Documentation de mon API Express.js avec Swagger"
+    "description": "Documentation de Webhook API Server"
   },
   "paths": {
     "/webhooks": {
