@@ -136,27 +136,6 @@
           }
         }
       }
-    },
-    "/received-messages": {
-      "get": {
-        "summary": "Obtenir toutes les messages reçues",
-        "description": "Route pour obtenir toutes les messages reçues.",
-        "responses": {
-          "200": {
-            "description": "Liste de toutes les messages reçues",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }
