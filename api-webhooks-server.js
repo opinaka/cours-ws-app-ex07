@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 const swaggerOptions = {
   customCss: `
     .swagger-ui .topbar {
-      background-image: url('./ynov.png');
+      background-image: url('https://raw.githubusercontent.com/opinaka/cours-ws-app-ex06/main/.png');
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -29,7 +29,7 @@ const swaggerOptions = {
     }
   `,
   customSiteTitle: "Opinaka",
-  customfavIcon: "./ynov.png"
+  customfavIcon: "https://raw.githubusercontent.com/opinaka/cours-ws-app-ex06/main/ynov.png"
 };
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
