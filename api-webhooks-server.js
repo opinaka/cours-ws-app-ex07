@@ -11,7 +11,27 @@ const swaggerDocument = require('./webhooks-swagger.json'); // Chemin vers votre
 app.use(bodyParser.json());
 
 // Servez la documentation Swagger UI à partir du fichier JSON
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// Personnalisation du rendu de Swagger UI
+const swaggerOptions = {
+  customCss: `
+    .swagger-ui .topbar {
+      background-image: url('https://raw.githubusercontent.com/opinaka/cours-ws-app-ex06/main/ynov.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      height: 50px; /* Ajustez la hauteur en fonction de votre logo */
+    }
+
+    .swagger-ui .topbar .link {
+      display: none; /* Masquer le logo Swagger par défaut */
+    }
+  `,
+  customSiteTitle: "Opinaka",
+  customfavIcon: "https://raw.githubusercontent.com/opinaka/cours-ws-app-ex06/main/ynov.png"
+};
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 // Liste des webhooks avec les URLs des API des clients
 const webhooks = new Map();
