@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mon API Express.js",
+    "version": "1.0.0",
+    "description": "Documentation de mon API Express.js avec Swagger"
+  },
+  "paths": {
+    "/webhooks": {
+      "post": {
+        "summary": "Enregistrer un nouveau message",
+        "description": "Enregistre un nouveau message dans la liste des messages reçus via un webhook",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "valeur": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message enregistré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
