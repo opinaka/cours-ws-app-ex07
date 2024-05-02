@@ -7,42 +7,11 @@ const uuid = require('uuid');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./webhooks-swagger.json'); // Chemin vers votre fichier JSON
 
-/*
-# const swaggerJsdoc = require('swagger-jsdoc')
-# const swaggerUi = require('swagger-ui-express')
-
-const options = {
-  swaggerDefinition: {
-    restapi: '3.0.0',
-    info: {
-      title: 'My API',
-      version: '1.0.0',
-      description: 'My REST API',
-    },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-      },
-    ],
-  },
-  apis: ['ddd.js'],
-}
-
-const specs = swaggerJsdoc(options)
-
-module.exports = (app) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
-}
-
-*/
-
 // Middleware pour parser le corps des requêtes en JSON
 app.use(bodyParser.json());
 
 // Servez la documentation Swagger UI à partir du fichier JSON
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Liste des webhooks avec les URLs des API des clients
 const webhooks = new Map();
