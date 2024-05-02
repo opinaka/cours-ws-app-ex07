@@ -8,34 +8,148 @@
   "paths": {
     "/webhooks": {
       "post": {
-        "summary": "Enregistrer un nouveau message",
-        "description": "Enregistre un nouveau message dans la liste des messages reçus via un webhook",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "valeur": {
-                    "type": "string"
+        "summary": "Enregistrer un nouveau webhook",
+        "description": "Route pour enregistrer un nouveau webhook avec l'URL de l'API du client.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "clientApiUrl",
+            "description": "URL de l'API du client",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ID du webhook enregistré avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "webhookId": {
+                      "type": "string",
+                      "description": "ID unique du webhook généré"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "URL de webhook déjà existante",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Message d'erreur indiquant que l'URL du webhook existe déjà"
+                    }
                   }
                 }
               }
             }
           }
-        },
+        }
+      },
+      "get": {
+        "summary": "Obtenir la liste des URLs des webhooks",
+        "description": "Route pour obtenir la liste des URLs des webhooks.",
         "responses": {
           "200": {
-            "description": "Message enregistré avec succès",
+            "description": "Liste des URLs des webhooks obtenue avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "webhookId": {
+                        "type": "string",
+                        "description": "ID du webhook"
+                      },
+                      "clientApiUrl": {
+                        "type": "string",
+                        "description": "URL de l'API du client associé au webhook"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/{webhookId}": {
+      "delete": {
+        "summary": "Désinscrire un webhook",
+        "description": "Route pour désinscrire un webhook de la liste.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "webhookId",
+            "description": "ID du webhook à désinscrire",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook désinscrit avec succès",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Message indiquant que le webhook a été désinscrit avec succès"
                     }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Webhook non trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Message d'erreur indiquant que le webhook n'a pas été trouvé"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/received-messages": {
+      "get": {
+        "summary": "Obtenir toutes les messages reçues",
+        "description": "Route pour obtenir toutes les messages reçues.",
+        "responses": {
+          "200": {
+            "description": "Liste de toutes les messages reçues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
                   }
                 }
               }
